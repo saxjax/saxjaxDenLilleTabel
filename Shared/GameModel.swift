@@ -6,8 +6,18 @@
 //
 
 import Foundation
+import Accessibility
 class GameModel:ObservableObject {
-  
+
+
+
+//  GameStates
+//  TODO:Implement that points change when a field is updated.
+  typealias FieldTuple = (row: Int, col: Int,val: Int?)
+  @Published var ActiveValue:FieldTuple = (row: 0, col: 0,val: 0)  {
+    willSet{changedGameState(row: newValue.row, col: newValue.col, value: newValue.val!)}
+  }
+
   @Published var gamestate:[[Int?]] = [[1,2,3,4,5,6,7,8,9,10],
                  [2,nil,nil,nil,nil,nil,nil,nil,nil,nil],
                  [3,nil,nil,nil,nil,nil,nil,nil,nil,nil],
@@ -18,7 +28,7 @@ class GameModel:ObservableObject {
                  [8,nil,nil,nil,nil,nil,nil,nil,nil,nil],
                  [9,nil,nil,nil,nil,nil,nil,nil,nil,nil],
                  [10,nil,nil,nil,nil,nil,nil,nil,nil,nil]
-                 ]
+  ]{ willSet{print(newValue)}}
   
 
   var pointStatus:[[Bool?]] = [[nil,nil,nil,nil,nil,nil,nil,nil,nil,nil],
@@ -57,18 +67,27 @@ class GameModel:ObservableObject {
                                       [10,nil,nil,nil,nil,nil,nil,nil,nil,nil]]
 
   @Published var points:Int = 0
-  private var lastInputCorrectness = false
-  let fillCost = -2
+
+
+  //  Points
+  let fillCost = -1
+  let fieldPoint = 1
+  var fullTablePoint:Int {return -fillCost}
 
 
   func changedGameState(row:Int,col:Int,value: Int){
     if (fieldIsCorrect(row: row, col: col) == true && pointStatus[row][col] != nil && pointStatus[row][col]==false){
+      gamestate[row][col]=value
       pointStatus[row][col] = true
       points += 1
     }
     else if (fieldIsCorrect(row: row, col: col) == false && pointStatus[row][col] != nil && pointStatus[row][col]==true){
+      gamestate[row][col]=value
       pointStatus[row][col] = false
       points -= 1
+    }
+    else {
+      gamestate[row][col]=value
     }
 
   }
@@ -78,24 +97,24 @@ class GameModel:ObservableObject {
     return gamestate[row][col] == facit[row][col]
   }
 
-  func scorePoint(isCorrect:Bool)->Bool{
-    if (isCorrect == true && lastInputCorrectness == false){
-      points += 1
-      lastInputCorrectness = isCorrect
-    }
-    else if  (isCorrect == true && lastInputCorrectness == true){
-
-    }
-    else if (isCorrect == false){
-      lastInputCorrectness = false
-    }
-    return isCorrect
-  }
+//  func scorePoint(isCorrect:Bool)->Bool{
+//    if (isCorrect == true && lastInputCorrectness == false){
+//      points += 1
+//      lastInputCorrectness = isCorrect
+//    }
+//    else if  (isCorrect == true && lastInputCorrectness == true){
+//
+//    }
+//    else if (isCorrect == false){
+//      lastInputCorrectness = false
+//    }
+//    return isCorrect
+//  }
 
 
   func getPoint(){
     if(gamestate==facit){
-      points += 1
+      points += fullTablePoint
       gamestate=initialState
     }
   }
@@ -105,6 +124,10 @@ class GameModel:ObservableObject {
       gamestate=facit
       points += fillCost
     }
+  }
+
+  func clearField(row:Int,col:Int){
+    gamestate[row][col]=nil
   }
 
 }

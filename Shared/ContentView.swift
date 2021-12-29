@@ -32,7 +32,8 @@ struct ContentView: View {
             }
           }
         }
-        Text("Til min søde Asta Luna").font(.title)
+
+//        Text("Til min søde Asta Luna").font(.title)
         Text("Den Lille Tabel").font(.title)
         Text("skriv de manglende tal, feks: 2,4,6,8...")
 
@@ -51,38 +52,56 @@ struct ContentView: View {
           Spacer()
           Spacer()
         }
-
+#if os(macOS)
+        HStack{
+          Button("Fyld tabel:\(m.fillCost)") {
+            m.fillGame()
+            isFocused = false
+          }
+          Button("Saml point:\(m.fullTablePoint)") {
+            m.getPoint()
+            isFocused = false
+          }
+        }
+#endif
       }.scaledToFit().padding()
         .toolbar {
           ToolbarItem(placement: .keyboard) {
-            Button("Færdig") {
+            Button("Luk") {
               isFocused = false
             }
           }
           ToolbarItem(placement: .keyboard) {
-            Button("Udfyld tabel:\(m.fillCost)") {
+            Button("Fyld tabel:\(m.fillCost)") {
               m.fillGame()
-
+              isFocused = false
             }
           }
+//          ToolbarItem(placement: .keyboard) {
+//            Button("Hjælp:\(m.fillCost)") {
+//              m.fillGame()
+//              isFocused = false
+//            }
+//          }
           ToolbarItem(placement: .keyboard) {
-              Button("Saml point:\(m.points)") {
+              Button("Saml point:\(m.fullTablePoint)") {
                 m.getPoint()
                 isFocused = false
               }
             }
-
-
-
         }
 
     }
 
 
-  struct ContentView_Previews: PreviewProvider {
+  struct ContentView_Previews_Dark: PreviewProvider {
       static var previews: some View {
-        ContentView()
+        ContentView().preferredColorScheme(.dark)
       }
+  }
+  struct ContentView_Previews_Light: PreviewProvider {
+    static var previews: some View {
+      ContentView().preferredColorScheme(.light)    }
   }
 
   struct Field: View {
@@ -95,7 +114,11 @@ struct ContentView: View {
     #if os(macOS)
       TextField("x", value: $fieldValue ,formatter: NumberFormatter())
         .multilineTextAlignment(.center)
+        .textFieldStyle(PlainTextFieldStyle())
         .background(isCorrect ? Color.green : Color.clear)
+//        .foregroundColor(isCorrect ? Color.primary : Color.secondary)
+        .font(isCorrect ? Font.title : Font.title2)
+
     #else
       TextField("x", value: $fieldValue ,formatter: NumberFormatter())
         .multilineTextAlignment(.center)
