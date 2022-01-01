@@ -19,6 +19,7 @@
 		E40DE9A9277B334A00B6C716 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E40DE9A7277B334A00B6C716 /* Assets.xcassets */; };
 		E40DE9AB277B342C00B6C716 /* denlilletabelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40DE9AA277B342C00B6C716 /* denlilletabelApp.swift */; };
 		E40DE9AC277B342C00B6C716 /* denlilletabelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E40DE9AA277B342C00B6C716 /* denlilletabelApp.swift */; };
+		E4C99D5F2780AEFC0000214A /* saxjaxdenlilletabelTestsIOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C99D5E2780AEFC0000214A /* saxjaxdenlilletabelTestsIOS.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E40DE967277B32B300B6C716;
 			remoteInfo = "saxjaxdenlilletabel (macOS)";
+		};
+		E4C99D602780AEFC0000214A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E40DE956277B32B100B6C716 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E40DE961277B32B300B6C716;
+			remoteInfo = "saxjaxdenlilletabel (iOS)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -53,6 +61,8 @@
 		E40DE9A7277B334A00B6C716 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E40DE9AA277B342C00B6C716 /* denlilletabelApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = denlilletabelApp.swift; sourceTree = "<group>"; };
 		E40DE9AD277B349A00B6C716 /* saxjaxdenlilletabel (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "saxjaxdenlilletabel (iOS).entitlements"; sourceTree = "<group>"; };
+		E4C99D5C2780AEFC0000214A /* saxjaxdenlilletabelTestsIOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = saxjaxdenlilletabelTestsIOS.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4C99D5E2780AEFC0000214A /* saxjaxdenlilletabelTestsIOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = saxjaxdenlilletabelTestsIOS.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +94,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E4C99D592780AEFC0000214A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -95,6 +112,7 @@
 				E40DE969277B32B300B6C716 /* macOS */,
 				E40DE972277B32B300B6C716 /* Tests iOS */,
 				E40DE97E277B32B300B6C716 /* Tests macOS */,
+				E4C99D5D2780AEFC0000214A /* saxjaxdenlilletabelTestsIOS */,
 				E40DE963277B32B300B6C716 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -117,6 +135,7 @@
 				E40DE968277B32B300B6C716 /* saxjaxdenlilletabel.app */,
 				E40DE96F277B32B300B6C716 /* Tests iOS.xctest */,
 				E40DE97B277B32B300B6C716 /* Tests macOS.xctest */,
+				E4C99D5C2780AEFC0000214A /* saxjaxdenlilletabelTestsIOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,6 +164,14 @@
 				E40DE981277B32B300B6C716 /* Tests_macOSLaunchTests.swift */,
 			);
 			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+		E4C99D5D2780AEFC0000214A /* saxjaxdenlilletabelTestsIOS */ = {
+			isa = PBXGroup;
+			children = (
+				E4C99D5E2780AEFC0000214A /* saxjaxdenlilletabelTestsIOS.swift */,
+			);
+			path = saxjaxdenlilletabelTestsIOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +247,24 @@
 			productReference = E40DE97B277B32B300B6C716 /* Tests macOS.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		E4C99D5B2780AEFC0000214A /* saxjaxdenlilletabelTestsIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4C99D622780AEFC0000214A /* Build configuration list for PBXNativeTarget "saxjaxdenlilletabelTestsIOS" */;
+			buildPhases = (
+				E4C99D582780AEFC0000214A /* Sources */,
+				E4C99D592780AEFC0000214A /* Frameworks */,
+				E4C99D5A2780AEFC0000214A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E4C99D612780AEFC0000214A /* PBXTargetDependency */,
+			);
+			name = saxjaxdenlilletabelTestsIOS;
+			productName = saxjaxdenlilletabelTestsIOS;
+			productReference = E4C99D5C2780AEFC0000214A /* saxjaxdenlilletabelTestsIOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -244,6 +289,10 @@
 						CreatedOnToolsVersion = 13.1;
 						TestTargetID = E40DE967277B32B300B6C716;
 					};
+					E4C99D5B2780AEFC0000214A = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = E40DE961277B32B300B6C716;
+					};
 				};
 			};
 			buildConfigurationList = E40DE959277B32B100B6C716 /* Build configuration list for PBXProject "saxjaxdenlilletabel" */;
@@ -263,6 +312,7 @@
 				E40DE967277B32B300B6C716 /* saxjaxdenlilletabel (macOS) */,
 				E40DE96E277B32B300B6C716 /* Tests iOS */,
 				E40DE97A277B32B300B6C716 /* Tests macOS */,
+				E4C99D5B2780AEFC0000214A /* saxjaxdenlilletabelTestsIOS */,
 			);
 		};
 /* End PBXProject section */
@@ -292,6 +342,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		E40DE979277B32B300B6C716 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E4C99D5A2780AEFC0000214A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -339,6 +396,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E4C99D582780AEFC0000214A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4C99D5F2780AEFC0000214A /* saxjaxdenlilletabelTestsIOS.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -351,6 +416,11 @@
 			isa = PBXTargetDependency;
 			target = E40DE967277B32B300B6C716 /* saxjaxdenlilletabel (macOS) */;
 			targetProxy = E40DE97C277B32B300B6C716 /* PBXContainerItemProxy */;
+		};
+		E4C99D612780AEFC0000214A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E40DE961277B32B300B6C716 /* saxjaxdenlilletabel (iOS) */;
+			targetProxy = E4C99D602780AEFC0000214A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -694,6 +764,57 @@
 			};
 			name = Release;
 		};
+		E4C99D632780AEFC0000214A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LW5S74625G;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dk.saxjax.saxjaxdenlilletabelTestsIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/saxjaxdenlilletabel.app/saxjaxdenlilletabel";
+			};
+			name = Debug;
+		};
+		E4C99D642780AEFC0000214A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LW5S74625G;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dk.saxjax.saxjaxdenlilletabelTestsIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/saxjaxdenlilletabel.app/saxjaxdenlilletabel";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -738,6 +859,15 @@
 			buildConfigurations = (
 				E40DE995277B32B300B6C716 /* Debug */,
 				E40DE996277B32B300B6C716 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E4C99D622780AEFC0000214A /* Build configuration list for PBXNativeTarget "saxjaxdenlilletabelTestsIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4C99D632780AEFC0000214A /* Debug */,
+				E4C99D642780AEFC0000214A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

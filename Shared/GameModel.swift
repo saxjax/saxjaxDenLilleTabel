@@ -7,6 +7,7 @@
 
 import Foundation
 import Accessibility
+import SwiftUI
 class GameModel:ObservableObject {
 
 
@@ -28,7 +29,7 @@ class GameModel:ObservableObject {
                  [8,nil,nil,nil,nil,nil,nil,nil,nil,nil],
                  [9,nil,nil,nil,nil,nil,nil,nil,nil,nil],
                  [10,nil,nil,nil,nil,nil,nil,nil,nil,nil]
-  ]{ willSet{print(newValue)}}
+  ]{ didSet{potentialPoints = GetpotentialPoints}}
   
 
   var pointStatus:[[Bool?]] = [[nil,nil,nil,nil,nil,nil,nil,nil,nil,nil],
@@ -43,7 +44,7 @@ class GameModel:ObservableObject {
                                [nil,false,false,false,false,false,false,false,false,false]
   ]
 
- let facit = [[1,2,3,4,5,6,7,8,9,10],
+  let facit:[[Int?]] = [[1,2,3,4,5,6,7,8,9,10],
              [2,4,6,8,10,12,14,16,18,20],
              [3,6,9,12,15,18,21,24,27,30],
              [4,8,12,16,20,24,28,32,36,40],
@@ -67,12 +68,28 @@ class GameModel:ObservableObject {
                                       [10,nil,nil,nil,nil,nil,nil,nil,nil,nil]]
 
   @Published var points:Int = 0
+  @Published var potentialPoints:Int = 0
+  private var GetpotentialPoints: Int {
+    var result:[Int?] = [Int?]()
+    for row in 0...9 {
+      for col in 0...9{
+        if (gamestate[row][col] == facit[row][col]) {
+          pointStatus[row][col] = true
+          result.append( gamestate[row][col])
+        }
+        else {
+          pointStatus[row][col] = false
+        }
+      }
+    }
+    return result.count - 19
+  }
 
 
   //  Points
-  let fillCost = -1
+  let fillCost = 81
   let fieldPoint = 1
-  var fullTablePoint:Int {return -fillCost}
+  var fullTablePoint:Int {return fillCost}
 
 
   func changedGameState(row:Int,col:Int,value: Int){
@@ -115,19 +132,33 @@ class GameModel:ObservableObject {
   func getPoint(){
     if(gamestate==facit){
       points += fullTablePoint
+      potentialPoints = 0
+      gamestate=initialState
+    }
+    else if (potentialPoints > 0){
+      points +=  potentialPoints
+      potentialPoints = 0
       gamestate=initialState
     }
   }
 
   func fillGame(){
     if(gamestate != facit){
+      points += potentialPoints
       gamestate=facit
-      points += fillCost
+      points -= fillCost
+      potentialPoints = 0
     }
   }
 
   func clearField(row:Int,col:Int){
     gamestate[row][col]=nil
   }
+
+
+    func convertToCelsius(fahrenheit: Double) -> Double {
+      return (fahrenheit - 32) * 5 / 9
+    }
+  
 
 }

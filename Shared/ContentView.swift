@@ -19,6 +19,7 @@ struct pos:Hashable{
 struct ContentView: View {
   @StateObject var m = GameModel()
   @FocusState private var isFocused: Bool
+  @State var showMathPlaceholder = false
   
     var body: some View {
 
@@ -42,9 +43,11 @@ struct ContentView: View {
             HStack{
               ForEach((0...9), id: \.self){column in
                 Field(id: pos(row: row, col: column),
-                      facit:m.facit[row][column],
-                      fieldValue: $m.gamestate[row][column])
+                      fieldValue: $m.gamestate[row][column],
+                      facit: m.facit[row][column]!,
+                       placeholderIsMath: $showMathPlaceholder)
                   .frame(minWidth: 25, idealWidth: 50, maxWidth: 100, minHeight: 25, idealHeight: 50, maxHeight: 100, alignment: .center).focused($isFocused)
+                  .help(Text("\(row+1)x\(column+1)"))
               }
             }
           }
@@ -52,13 +55,14 @@ struct ContentView: View {
           Spacer()
           Spacer()
         }
+        Toggle("vis regnestykker", isOn: $showMathPlaceholder)
 #if os(macOS)
         HStack{
           Button("Fyld tabel:\(m.fillCost)") {
             m.fillGame()
             isFocused = false
           }
-          Button("Saml point:\(m.fullTablePoint)") {
+          Button("Saml point:\(m.potentialPoints)") {
             m.getPoint()
             isFocused = false
           }
@@ -84,7 +88,7 @@ struct ContentView: View {
 //            }
 //          }
           ToolbarItem(placement: .keyboard) {
-              Button("Saml point:\(m.fullTablePoint)") {
+              Button("Saml point:\(m.potentialPoints)") {
                 m.getPoint()
                 isFocused = false
               }
@@ -106,24 +110,32 @@ struct ContentView: View {
 
   struct Field: View {
     let id:pos
-    let facit: Int
     @Binding var fieldValue: Int?
+    let facit: Int
+    @Binding var placeholderIsMath: Bool
+    var placeholder:String {placeholderIsMath ? "\(id.row+1)x\(id.col+1)" : "X"}
 
     var body: some View {
       let isCorrect = facit==fieldValue
     #if os(macOS)
-      TextField("x", value: $fieldValue ,formatter: NumberFormatter())
-        .multilineTextAlignment(.center)
+      TextField(placeholder, value: $fieldValue ,formatter: NumberFormatter())
+
         .textFieldStyle(PlainTextFieldStyle())
+        .multilineTextAlignment(.center)
         .background(isCorrect ? Color.green : Color.clear)
-//        .foregroundColor(isCorrect ? Color.primary : Color.secondary)
-        .font(isCorrect ? Font.title : Font.title2)
+        .font(isCorrect ? Font.title : Font.footnote)
+        .minimumScaleFactor(0.01)
+
+
 
     #else
-      TextField("x", value: $fieldValue ,formatter: NumberFormatter())
+      TextField(placeholder, value: $fieldValue ,formatter: NumberFormatter())
         .multilineTextAlignment(.center)
         .keyboardType(.numberPad)
         .background(isCorrect ? Color.green : Color.clear)
+        .font(isCorrect ? Font.title2 : Font.footnote)
+        .minimumScaleFactor(0.01)
+
     #endif
     }
   }
