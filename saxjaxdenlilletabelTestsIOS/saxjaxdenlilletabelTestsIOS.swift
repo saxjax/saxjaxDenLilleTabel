@@ -58,16 +58,16 @@ class saxjaxdenlilletabelTestsIOS: XCTestCase {
     XCTAssertEqual(sut.points, 4)
   }
 
-  func testGet2PointByUncorrectingAValue(){
-
-    sut.gamestate[1][1]=4
-    sut.gamestate[2][2]=9
-    sut.gamestate[3][3]=16
-    sut.gamestate[3][3]=15
-
-    sut.getPoint()
-    XCTAssertEqual(sut.points, 2)
-  }
+//  func testGet2PointByUncorrectingAValue(){
+//
+//    sut.gamestate[1][1]=4
+//    sut.gamestate[2][2]=9
+//    sut.gamestate[3][3]=16
+//    sut.gamestate[3][3]=15
+//
+//    sut.getPoint()
+//    XCTAssertEqual(sut.points, 2)
+//  }
 
   func testFilleGame_from_0_Points_should_return_0_Points(){
 
@@ -89,6 +89,23 @@ class saxjaxdenlilletabelTestsIOS: XCTestCase {
     sut.getPoint()
 
     XCTAssertEqual(sut.points, 23)
+  }
+
+  func testCompleteGame_should_return_81_Points(){
+
+    for row in 0...9 {
+      for col in 0...9{
+        sut.gamestate[row][col]=(row+1)*(col+1)
+      }
+    }
+//
+//
+//    sut.fillGame()
+//    sut.getPoint()
+//    sut.fillGame()
+    sut.getPoint()
+
+    XCTAssertEqual(sut.points, 81)
   }
 
 

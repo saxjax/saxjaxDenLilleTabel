@@ -30,6 +30,7 @@ struct ContentView: View {
             HStack {
               Text("Points:\(m.points)").frame(alignment:.topLeading)
               Spacer()
+              Text("Spil nr:\(m.gameNr)").frame(alignment:.topTrailing)
             }
           }
         }
@@ -58,8 +59,12 @@ struct ContentView: View {
         Toggle("vis regnestykker", isOn: $showMathPlaceholder)
 #if os(macOS)
         HStack{
-          Button("Fyld tabel:\(m.fillCost)") {
+          Button(m.tableFilled ?  "Vend tilbage" :"Fyld Tabel" ) {
             m.fillGame()
+            isFocused = false
+          }
+          Button("Nyt spil") {
+            m.resetGameFields()
             isFocused = false
           }
           Button("Saml point:\(m.potentialPoints)") {
@@ -70,23 +75,24 @@ struct ContentView: View {
 #endif
       }.scaledToFit().padding()
         .toolbar {
+
           ToolbarItem(placement: .keyboard) {
             Button("Luk") {
               isFocused = false
             }
           }
           ToolbarItem(placement: .keyboard) {
-            Button("Fyld tabel:\(m.fillCost)") {
+            Button("nyt spil") {
+              m.resetGameFields()
+              isFocused = false
+            }
+          }
+          ToolbarItem(placement: .keyboard) {
+            Button(m.tableFilled ?  "Vend tilbage" :"Fyld Tabel") {
               m.fillGame()
               isFocused = false
             }
           }
-//          ToolbarItem(placement: .keyboard) {
-//            Button("Hjælp:\(m.fillCost)") {
-//              m.fillGame()
-//              isFocused = false
-//            }
-//          }
           ToolbarItem(placement: .keyboard) {
               Button("Saml point:\(m.potentialPoints)") {
                 m.getPoint()
