@@ -121,6 +121,11 @@ struct ContentView: View {
     @Binding var placeholderIsMath: Bool
     var placeholder:String {placeholderIsMath ? "\(id.row+1)x\(id.col+1)" : "X"}
 
+      func numberFieldChanged(to value: Int?){
+          print("numberField changed value to:\(String(describing: value)), the facit value for this field is: \(facit)")
+          //do something on changing value in TextField
+      }
+
     var body: some View {
       let isCorrect = facit==fieldValue
     #if os(macOS)
@@ -135,7 +140,8 @@ struct ContentView: View {
 
 
     #else
-        TextField(placeholder, value: $fieldValue ,format: .number)
+        //the onChange can be omitted, it is here to show that I have the posibility
+        TextField(placeholder, value: $fieldValue.onChange(numberFieldChanged) ,format: .number)
         .multilineTextAlignment(.center)
         .keyboardType(.numberPad)
         .background(isCorrect ? Color.green : Color.clear)
