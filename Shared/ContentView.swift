@@ -124,7 +124,7 @@ struct ContentView: View {
     var body: some View {
       let isCorrect = facit==fieldValue
     #if os(macOS)
-      TextField(placeholder, value: $fieldValue ,formatter: NumberFormatter())
+        TextField(placeholder, value: $fieldValue ,format: .number)
 
         .textFieldStyle(PlainTextFieldStyle())
         .multilineTextAlignment(.center)
@@ -135,7 +135,7 @@ struct ContentView: View {
 
 
     #else
-      TextField(placeholder, value: $fieldValue ,formatter: NumberFormatter())
+        TextField(placeholder, value: $fieldValue ,format: .number)
         .multilineTextAlignment(.center)
         .keyboardType(.numberPad)
         .background(isCorrect ? Color.green : Color.clear)
