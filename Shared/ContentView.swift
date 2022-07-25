@@ -30,6 +30,7 @@ struct ContentView: View {
             HStack {
               Text("Points:\(m.points)").frame(alignment:.topLeading)
               Spacer()
+              Text("Spil nr:\(m.gameNr)").frame(alignment:.topTrailing)
             }
           }
         }
@@ -58,8 +59,12 @@ struct ContentView: View {
         Toggle("vis regnestykker", isOn: $showMathPlaceholder)
 #if os(macOS)
         HStack{
-          Button("Fyld tabel:\(m.fillCost)") {
+          Button(m.tableFilled ?  "Vend tilbage" :"Fyld Tabel" ) {
             m.fillGame()
+            isFocused = false
+          }
+          Button("Nyt spil") {
+            m.resetGameFields()
             isFocused = false
           }
           Button("Saml point:\(m.potentialPoints)") {
@@ -70,23 +75,24 @@ struct ContentView: View {
 #endif
       }.scaledToFit().padding()
         .toolbar {
+
           ToolbarItem(placement: .keyboard) {
             Button("Luk") {
               isFocused = false
             }
           }
           ToolbarItem(placement: .keyboard) {
-            Button("Fyld tabel:\(m.fillCost)") {
+            Button("nyt spil") {
+              m.resetGameFields()
+              isFocused = false
+            }
+          }
+          ToolbarItem(placement: .keyboard) {
+            Button(m.tableFilled ?  "Vend tilbage" :"Fyld Tabel") {
               m.fillGame()
               isFocused = false
             }
           }
-//          ToolbarItem(placement: .keyboard) {
-//            Button("Hjælp:\(m.fillCost)") {
-//              m.fillGame()
-//              isFocused = false
-//            }
-//          }
           ToolbarItem(placement: .keyboard) {
               Button("Saml point:\(m.potentialPoints)") {
                 m.getPoint()
@@ -115,10 +121,15 @@ struct ContentView: View {
     @Binding var placeholderIsMath: Bool
     var placeholder:String {placeholderIsMath ? "\(id.row+1)x\(id.col+1)" : "X"}
 
+      func numberFieldChanged(to value: Int?){
+          print("numberField changed value to:\(String(describing: value)), the facit value for this field is: \(facit)")
+          //do something on changing value in TextField
+      }
+
     var body: some View {
       let isCorrect = facit==fieldValue
     #if os(macOS)
-      TextField(placeholder, value: $fieldValue ,formatter: NumberFormatter())
+        TextField(placeholder, value: $fieldValue ,format: .number)
 
         .textFieldStyle(PlainTextFieldStyle())
         .multilineTextAlignment(.center)
@@ -129,7 +140,8 @@ struct ContentView: View {
 
 
     #else
-      TextField(placeholder, value: $fieldValue ,formatter: NumberFormatter())
+        //the onChange can be omitted, it is here to show that I have the posibility
+        TextField(placeholder, value: $fieldValue.onChange(numberFieldChanged) ,format: .number)
         .multilineTextAlignment(.center)
         .keyboardType(.numberPad)
         .background(isCorrect ? Color.green : Color.clear)
